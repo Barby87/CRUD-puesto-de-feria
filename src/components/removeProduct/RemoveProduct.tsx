@@ -16,7 +16,6 @@ const RemoveProduct = () => {
     useEffect(() => {
         // const product = dispatch(readProductAction(id))
         const product = productsList.find((product:any) => parseInt(product.id) === parseInt(id));
-        console.log('product', product)
         // debugger
         setName(product?.name);
         setPrice(product?.price);

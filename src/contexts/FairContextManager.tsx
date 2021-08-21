@@ -29,7 +29,6 @@ const FairContextManager = ({children}: Props) => {
     }
 
     const getProductById = (id: any):any => {
-        console.log('typeof id', typeof(id));
         const product = products.find((element:any) => parseInt(element.id) === parseInt(id));
         return product;
     }
