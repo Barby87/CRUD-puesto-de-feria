@@ -1,6 +1,6 @@
 import { useContext } from "react";
 // import FormProducts from "../../components/formProducts/FormProducts";
-import Product from "../../components/product/Product";
+// import Product from "../../components/product/Product";
 import ProductsList from "../../components/productsList/ProductsList";
 import ProductsContext from "../../contexts/FairContext";
 import styles from './MyFair.module.css'
@@ -23,7 +23,6 @@ const MyFair = () => {
               
             )
           }
-
             <div className="row d-flex align-content-center justify-content-center py-5">
               <div className="col-8">
                 {

@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import useFormProducts from "../../hooks/useFormProducts";
-import FairContext from "../../contexts/FairContext";
 import styles from "./FormUpdateProduct.module.css";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { updateProductAction } from '../../store/products/actions';
 
 interface Props {
     id: number,
@@ -11,25 +12,26 @@ interface Props {
     stock: number,
 }
 
-const FormUpdateProduct = ({id, name:initialName, price:initialPrice, stock:initialStock}:Props) => {
+const FormUpdateProduct = ({name:initialName, price:initialPrice, stock:initialStock}:Props) => {
     const history = useHistory();
+    const dispatch = useDispatch();
+    const { id }: any = useParams();
+
     const {formValues, handleChange} = useFormProducts({
         productName: initialName,
         productPrice: initialPrice,
         productStock: initialStock
     });
 
-    const { handleUpdate } = useContext(FairContext)
-
-    const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSubmit = (e:any) => {
         e.preventDefault();
         if(formValues.productName !== '' && formValues.productPrice !== '' && formValues.productStock !== '') {
-            handleUpdate({ 
-                id, 
+            dispatch(updateProductAction({
+                id: Number.parseInt(id),
                 name: formValues.productName, 
                 price: formValues.productPrice, 
                 stock: formValues.productStock
-            });
+            }))
         } else {
             return;
         }

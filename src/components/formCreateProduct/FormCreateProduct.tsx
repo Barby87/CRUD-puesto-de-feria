@@ -1,28 +1,29 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import useFormProducts from "../../hooks/useFormProducts";
-import FairContext from "../../contexts/FairContext";
 import styles from "./FormCreateProduct.module.css";
 import { useHistory } from 'react-router-dom';
+import { createProductAction } from '../../store/products/actions';
 
 const FormCreateProduct = () => {
     const history = useHistory()
-    const {formValues, handleChange} = useFormProducts({
+    const { formValues, handleChange } = useFormProducts({
         productName: '',
         productPrice: '',
         productStock: ''
     });
 
-    const { handleAdd } = useContext(FairContext)
+    const dispatch = useDispatch()
 
     const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
         if(formValues.productName !== '' && formValues.productPrice !== '' && formValues.productStock !== '') {
-            handleAdd({ 
-                id: new Date().getTime(), 
+            dispatch(createProductAction({
+                id: new Date().getTime(),
                 name: formValues.productName, 
                 price: formValues.productPrice, 
                 stock: formValues.productStock
-            });
+            }))
         } else {
             return;
         }
